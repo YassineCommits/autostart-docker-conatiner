@@ -1,0 +1,31 @@
+[Unit]
+Description=Nomad BPF Watcher Service
+After=network.target
+# If Nomad service runs locally, uncomment the following:
+# Wants=nomad.service
+# After=nomad.service
+
+[Service]
+# Environment file contains configuration (PORT, IFACE, NOMAD_ADDR, etc.)
+EnvironmentFile=-/etc/default/nomad-bpf-watcher
+
+# Consider creating a dedicated user/group for security
+# User=nomadwatcher
+# Group=nomadwatcher
+
+# Run the watcher binary. Arguments are passed via environment variables read from the EnvironmentFile
+# The binary itself needs to be adapted to read these environment variables
+# OR pass them explicitly on the command line using ${VAR_NAME} syntax:
+ExecStart=/usr/bin/watcher -port ${PORT} -iface ${IFACE}
+# Note: NOMAD_ADDR and NOMAD_TOKEN are passed via environment by EnvironmentFile
+# Ensure your Go app reads NOMAD_ADDR and NOMAD_TOKEN from the environment.
+
+Restart=on-failure
+RestartSec=5s
+
+# Recommended: Redirect stdout/stderr to journald
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

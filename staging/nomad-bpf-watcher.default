@@ -1,0 +1,18 @@
+# Configuration for nomad-bpf-watcher service
+# Edit these values as needed
+
+# Network interface for BPF program (e.g., eth0, enpXsY)
+IFACE="eth0"
+
+# TCP port for the Go watcher program's API/listener
+PORT="8080"
+
+# URL of the Nomad API (e.g., http://127.0.0.1:4646)
+NOMAD_ADDR="http://127.0.0.1:4646"
+
+# Nomad ACL token (leave empty if ACLs are disabled)
+# Example: NOMAD_TOKEN="your-secret-token"
+NOMAD_TOKEN=""
+
+# Additional options for the watcher binary, if any
+# WATCHER_OPTS=""
