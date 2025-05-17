@@ -1,4 +1,4 @@
-# Nomad BPF Watcher
+# Autostart docker container with Nomad BPF Watcher
 
 This project uses eBPF (Extended Berkeley Packet Filter) to monitor network traffic for specific patterns (like TLS SNI on a given port) and interacts with a HashiCorp Nomad cluster based on the observed traffic.
 
